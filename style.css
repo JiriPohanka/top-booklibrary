@@ -1,0 +1,10 @@
+.book-grid {
+    display: flex;
+}
+
+.book-grid div {
+    background-color: aquamarine;
+    text-align: center;
+    margin: 1rem;
+    padding: 1rem;
+}
