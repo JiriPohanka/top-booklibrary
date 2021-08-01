@@ -16,7 +16,7 @@ const bookLibrary = [
 newBookBtn.addEventListener('click', createNewBook);
 
 // after clicking the button to create a new book //
-function createNewBook () {
+function createNewBook() {
     generateFormPopup();
     newBookBtn.disabled = true;
     newBookForm.addEventListener('submit', submitForm);
@@ -79,6 +79,10 @@ const attachEventListeners = () => {
 const showBookDetail = (i, obj) => {
     newBookBtn.disabled = false
     generateBookDetailPopup();
+    generateBookDetail(i, obj);
+}
+
+const generateBookDetail = (i, obj) => {
     bookDetail = document.querySelector('.book-detail');
     bookDetail.innerHTML =
         `
@@ -88,13 +92,49 @@ const showBookDetail = (i, obj) => {
     <p>have read?: ${obj.status}</p>
     <button data-book-id="${i}" class="edit-book-btn">edit</button>
     <button data-book-id="${i}" class="btn delete-book-btn">delete</button>
+    <button class="btn ok-btn">ok</button>
     `
     const editButton = document.querySelector('div.book-detail-popup button.edit-book-btn');
     const deleteButton = document.querySelector('div.book-detail-popup button.delete-book-btn');
+    const okButton = document.querySelector('div.book-detail-popup button.ok-btn');
 
+    editButton.addEventListener('click', () => editBookDetail(i, obj));
     deleteButton.addEventListener('click', () => bookLibrary.splice(i, 1));
     deleteButton.addEventListener('click', () => bookDetailPopup.classList.toggle('show'));
     deleteButton.addEventListener('click', () => populateBookGrid());
+    okButton.addEventListener('click', () => bookDetailPopup.classList.toggle('show'));
+}
+
+const editBookDetail = (i, obj) => {
+    bookDetail = document.querySelector('.book-detail');
+    bookDetail.innerHTML =
+        `<form id="edit-book-form" class="edit-book-form">
+        <input name="edit-title" id="edit-title" value="${obj.title}" type="text">
+        <input name="edit-author" id="edit-author" value="${obj.author}" type="text">
+        <input name="edit-page-count" id="edit-page-count" value="${obj.pageCount}" type="number">
+        <input name="edit-status" id="edit-status" value="${obj.status}" type="text">
+        <button data-book-id="${i}" class="btn cancel-book-btn">cancel</button>
+        <input type="submit" id="update-book-btn" value="save changes">
+    </form>`
+
+    console.log(i, obj);
+    const editBookForm = document.querySelector('#edit-book-form');
+    editBookForm.addEventListener('submit', (e) => {
+        console.log(e);
+        console.log(i);
+        console.log(obj);
+        updateBookDetails(e, i, obj)
+    })
+    
+}
+
+const updateBookDetails = (e, i, obj) => {
+    e.preventDefault();
+    obj.title = e.target.elements['edit-title'].value;
+    obj.author = e.target.elements['edit-author'].value;
+    obj.pageCount = e.target.elements['edit-page-count'].value;
+    obj.status = e.target.elements['edit-status'].value;
+    generateBookDetail(i, obj);
 }
 
 const cleanBookGrid = () => {

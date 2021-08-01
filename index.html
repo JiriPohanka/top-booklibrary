@@ -15,38 +15,39 @@
             <img src="" alt="" id="logo">
         </div>
         <nav>
-            <ul></ul>
+            <button class="btn create-book-btn">+</button>
         </nav>
     </header>
 
     <main>
-        <button class="btn create-book-btn">+</button>
-        <div class="form-popup popup">
-            <div class="blocker"></div>
-            <div class="form-wrapper popup-content">
-                <form id="new-book-form" class="new-book-form">
-                    <label name="title">Title</label>
-                    <input name="title" id="title" placeholder="Lord of the Rings" type="text">
-                    <label name="author">Author</label>
-                    <input name="author" id="author" placeholder="J.R.R. Tolkien" type="text">
-                    <label name="page-count">Page count</label>
-                    <input name="page-count" id="page-count" placeholder="475" type="number">
-                    <label name="status">Finished reading?</label>
-                    <input name="status" id="status" placeholder="no" type="text">
-                    <input type="submit" id="submit-book-btn" value="Add new book">
-                </form>
+        <div class="popup-container">
+            <div class="form-popup popup">
+                <div class="blocker"></div>
+                <div class="form-wrapper popup-content">
+                    <form id="new-book-form" class="new-book-form">
+                        <label name="title">Title</label>
+                        <input name="title" id="title" placeholder="Lord of the Rings" type="text">
+                        <label name="author">Author</label>
+                        <input name="author" id="author" placeholder="J.R.R. Tolkien" type="text">
+                        <label name="page-count">Page count</label>
+                        <input name="page-count" id="page-count" placeholder="475" type="number">
+                        <label name="status">Finished reading?</label>
+                        <input name="status" id="status" placeholder="no" type="text">
+                        <input type="submit" id="submit-book-btn" value="Add new book">
+                    </form>
+                </div>
             </div>
-        </div>
-
-        <div class="book-detail-popup popup">
-            <div class="blocker"></div>
-            <div class="book-detail-wrapper popup-content">
-                <div class="book-detail">
-                    
+            
+            <div class="book-detail-popup popup">
+                <div class="blocker"></div>
+                <div class="book-detail-wrapper popup-content">
+                    <div class="book-detail">
+                        
+                    </div>
                 </div>
             </div>
         </div>
-
+            
         <div class="book-grid"></div>
     </main>
 

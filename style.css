@@ -4,15 +4,11 @@
 }
 
 main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    min-height: 100vh;
 }
 
 .book-grid {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
 }
@@ -43,8 +39,8 @@ main {
   
 .show {
     visibility: visible;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s
+    -webkit-animation: fadeIn 500ms;
+    animation: fadeIn 500ms
 }
 
 .popup-content {
@@ -52,6 +48,7 @@ main {
     background-color: whitesmoke;
     padding: 2rem;
     min-width: 200px;
+    min-height: 200px;
     border: 5px solid #353535;
     border-radius: 6px;
 }
@@ -66,7 +63,6 @@ main {
     right: 0;
 }
 
-  
 /* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
     from {opacity: 0;}
