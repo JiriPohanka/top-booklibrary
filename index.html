@@ -29,10 +29,14 @@
                         <input name="title" id="title" placeholder="Lord of the Rings" type="text">
                         <label name="author">Author</label>
                         <input name="author" id="author" placeholder="J.R.R. Tolkien" type="text">
+                        <input name="track-progress" type="checkbox" id="track-progress" checked>
+                        <label for="track-progress">track progress</label>
                         <label name="page-count">Page count</label>
                         <input name="page-count" id="page-count" placeholder="475" type="number">
-                        <label name="status">Finished reading?</label>
-                        <input name="status" id="status" placeholder="no" type="text">
+                        
+                        <div class="slider-wrapper">
+                            <input type="range" min="0" value="0" class="slider" id="current-page-slider">
+                        </div>
                         <input type="submit" id="submit-book-btn" value="Add new book">
                     </form>
                 </div>

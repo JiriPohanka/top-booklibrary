@@ -25,19 +25,31 @@ function createNewBook() {
 const submitForm = (e) => {
     newBookForm.removeEventListener('submit', submitForm);
     e.preventDefault();
+    
+    const currentPageSlider = document.querySelector('#current-page-slider');
+    let trackProgressCheckbox = document.querySelector('#track-progress');
+    
     let title = e.target.elements.title.value;
     let author = e.target.elements.author.value;
     let pageCount = e.target.elements['page-count'].value;
-    let status = e.target.elements.status.value;
+    let currentPage = pageCountSlider.getAttribute('min');
+    bookLibrary.push(new Book(title, author, pageCount, currentPage));
+    
+    if (trackProgressCheckbox.value[track-progress] === 'on') {
+        
 
-    bookLibrary.push(new Book(title, author, pageCount, status));
+        pageCountSlider.setAttribute('max', pageCount);
 
+    }
+    console.log(typeof pageCountSlider.max);
+ 
     populateBookGrid();
     newBookForm.reset();
     formPopup.classList.toggle('show');
     newBookBtn.disabled = false;
     newBookBtn.addEventListener('click', createNewBook);
 }
+
 
 function Book(title, author, pageCount, status) {
     this.title = title
