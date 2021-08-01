@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header>
         <div class="logo-wrapper">
@@ -16,11 +18,33 @@
             <ul></ul>
         </nav>
     </header>
-    
+
     <main>
-        
-        <div class="form-section">
-            <button class="btn create-book-btn">+</button>
+        <button class="btn create-book-btn">+</button>
+        <div class="form-popup popup">
+            <div class="blocker"></div>
+            <div class="form-wrapper popup-content">
+                <form id="new-book-form" class="new-book-form">
+                    <label name="title">Title</label>
+                    <input name="title" id="title" placeholder="Lord of the Rings" type="text">
+                    <label name="author">Author</label>
+                    <input name="author" id="author" placeholder="J.R.R. Tolkien" type="text">
+                    <label name="page-count">Page count</label>
+                    <input name="page-count" id="page-count" placeholder="475" type="number">
+                    <label name="status">Finished reading?</label>
+                    <input name="status" id="status" placeholder="no" type="text">
+                    <input type="submit" id="submit-book-btn" value="Add new book">
+                </form>
+            </div>
+        </div>
+
+        <div class="book-detail-popup popup">
+            <div class="blocker"></div>
+            <div class="book-detail-wrapper popup-content">
+                <div class="book-detail">
+                    
+                </div>
+            </div>
         </div>
 
         <div class="book-grid"></div>
@@ -29,4 +53,5 @@
 </body>
 
 <script src="app.js"></script>
+
 </html>
