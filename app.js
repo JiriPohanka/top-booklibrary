@@ -12,6 +12,9 @@ const updateLocalStorage = () => {
 const fetchBookLibrary = () => {
     const bookLibraryJSON = localStorage.getItem('bookLibraryKey');
     bookLibrary = JSON.parse(bookLibraryJSON);
+    if (bookLibrary === null) {
+        bookLibrary = [];
+    }
 }
 
 // when + button gets clicked //
@@ -179,6 +182,7 @@ function createBookSheet(i, obj) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    localStorage.removeItem('bookLibraryKey');
     fetchBookLibrary();
     populateBookGrid();
     newBookBtn.addEventListener('click', populateBookGrid);
