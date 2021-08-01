@@ -3,14 +3,16 @@ const bookGrid = document.querySelector('.book-grid')
 const formPopup = document.querySelector('.form-popup')
 const newBookForm = document.querySelector('#new-book-form')
 const bookDetailPopup = document.querySelector('.book-detail-popup')
-const bookLibrary = [
-    { title: 'Martian', author: 'Ray Bradbury', pageCount: 1, status: 'no' },
-    { title: 'Lord of The Rings', author: 'J.R.R. Tolkien', pageCount: 2, status: 'no' },
-    { title: 'Mistr a Markétka', author: 'N. Bulkagov', pageCount: 3, status: 'no' },
-    { title: 'Idiot', author: 'I. Dostoyevsky', pageCount: 4, status: 'no' },
-    { title: 'Anna Karenina', author: 'N. Tolstoy', pageCount: 5, status: 'no' },
-    { title: 'Last Meheecan', author: 'Butters', pageCount: 6, status: 'no' }
-]
+let bookLibrary = [];
+
+const updateLocalStorage = () => {
+    localStorage.setItem('bookLibraryKey', JSON.stringify(bookLibrary))
+}
+
+const fetchBookLibrary = () => {
+    const bookLibraryJSON = localStorage.getItem('bookLibraryKey');
+    bookLibrary = JSON.parse(bookLibraryJSON);
+}
 
 // when + button gets clicked //
 newBookBtn.addEventListener('click', createNewBook);
@@ -32,6 +34,8 @@ const submitForm = (e) => {
 
     bookLibrary.push(new Book(title, author, pageCount, status));
 
+    localStorage.removeItem('bookLibraryKey');
+    updateLocalStorage();
     populateBookGrid();
     newBookForm.reset();
     formPopup.classList.toggle('show');
@@ -72,7 +76,12 @@ const attachEventListeners = () => {
         deleteButton.addEventListener('click', (e) => {
             bookLibrary.splice(e.target.dataset.bookId, 1);
         })
-        deleteButton.addEventListener('click', () => populateBookGrid());
+        deleteButton.addEventListener('click', () => {
+            localStorage.removeItem('bookLibraryKey');
+            updateLocalStorage();
+            populateBookGrid()
+        }
+        )
     }
 }
 
@@ -101,7 +110,11 @@ const generateBookDetail = (i, obj) => {
     editButton.addEventListener('click', () => editBookDetail(i, obj));
     deleteButton.addEventListener('click', () => bookLibrary.splice(i, 1));
     deleteButton.addEventListener('click', () => bookDetailPopup.classList.toggle('show'));
-    deleteButton.addEventListener('click', () => populateBookGrid());
+    deleteButton.addEventListener('click', () => {
+        localStorage.removeItem('bookLibraryKey');
+        updateLocalStorage();
+        populateBookGrid()
+    })
     okButton.addEventListener('click', () => bookDetailPopup.classList.toggle('show'));
 }
 
@@ -125,7 +138,7 @@ const editBookDetail = (i, obj) => {
         console.log(obj);
         updateBookDetails(e, i, obj)
     })
-    
+
 }
 
 const updateBookDetails = (e, i, obj) => {
@@ -143,6 +156,7 @@ const cleanBookGrid = () => {
 
 const populateBookGrid = () => {
     cleanBookGrid();
+    fetchBookLibrary();
     for (let [i, book] of bookLibrary.entries()) {
         createBookSheet(i, book);
     }
@@ -165,10 +179,12 @@ function createBookSheet(i, obj) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    fetchBookLibrary();
     populateBookGrid();
     newBookBtn.addEventListener('click', populateBookGrid);
     formPopup.querySelector('.blocker').addEventListener('click', () => formPopup.classList.toggle('show'));
     formPopup.querySelector('.blocker').addEventListener('click', () => newBookBtn.disabled = false);
     bookDetailPopup.querySelector('.blocker').addEventListener('click', () => bookDetailPopup.classList.toggle('show'));
     bookDetailPopup.querySelector('.blocker').addEventListener('click', () => newBookBtn.disabled = false);
+
 });
